@@ -1,0 +1,10 @@
+# .NET Core build folders
+.vs
+
+**/bin/
+**/obj/
+
+# Banco de dados
+**/*.db
+**/*.db-shm
+**/*.db-wal
