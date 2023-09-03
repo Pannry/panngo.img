@@ -16,9 +16,11 @@ namespace Application.DTOs
         [MaxLength(200)]
         public string? Description { get; set; }
 
+        [Required(ErrorMessage = "Url Image is required")]
         [MaxLength(250)]
         public string? UrlImage { get; private set; }
 
+        [Required(ErrorMessage = "Url Thumbnail is required")]
         [MaxLength(250)]
         public string? UrlThumbnail { get; private set; }
 
