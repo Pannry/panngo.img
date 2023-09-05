@@ -11,18 +11,16 @@ namespace Application.DTOs
         [MaxLength(100)]
         public string? Name { get; set; }
 
-        [Required(ErrorMessage = "Description is required")]
-        [MinLength(5)]
         [MaxLength(200)]
         public string? Description { get; set; }
 
         [Required(ErrorMessage = "Url Image is required")]
         [MaxLength(250)]
-        public string? UrlImage { get; private set; }
+        public string? UrlImage { get; set; }
 
         [Required(ErrorMessage = "Url Thumbnail is required")]
         [MaxLength(250)]
-        public string? UrlThumbnail { get; private set; }
+        public string? UrlThumbnail { get; set; }
 
         [Required(ErrorMessage = "Enter the creation date")]
         public DateTime CreatedAt { get; private set; }

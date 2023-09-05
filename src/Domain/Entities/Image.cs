@@ -10,44 +10,41 @@ namespace Domain.Entities
         public string? UrlThumbnail { get; private set; }
         public DateTime CreatedAt { get; private set; }
 
-        public Image(string name, string description, string urlImage,
-            string urlThumbnail, DateTime createdAt)
+        public Image(string name, string description, string urlImage, string urlThumbnail)
         {
-            ValidateDomain(name, description, urlImage, urlThumbnail, createdAt);
+            Description = description;
+            ValidateDomain(name, urlImage, urlThumbnail, DateTime.Now);
         }
 
         public void Update(string name, string description, string urlImage,
             string urlThumbnail, DateTime createdAt)
         {
-            ValidateDomain(name, description, urlImage, urlThumbnail, createdAt);
+            Description = description;
+            ValidateDomain(name, urlImage, urlThumbnail, createdAt);
         }
 
-        private void ValidateDomain(string name, string description, string urlImage,
-            string urlThumbnail, DateTime createdAt)
+        private void ValidateDomain(string name, string urlImage, string urlThumbnail, 
+            DateTime createdAt)
         {
             DomainExceptionValidation.When(string.IsNullOrEmpty(name),
-                "Nome inválido. O nome é obrigatório");
+                "Invalid name. Name is required.");
 
             DomainExceptionValidation.When(name.Length < 3,
-                "O nome deve ter no mínimo 3 caracteres");
-
-            DomainExceptionValidation.When(string.IsNullOrEmpty(description),
-                "Descrição inválida. A descrição é obrigatória");
+                "Name field must be at least 3 characters.");
 
             DomainExceptionValidation.When(urlImage.Length < 5,
-                "A descrição deve ter no mínimo 5 caracteres");
+                "Name field must be at least 5 characters.");
 
             DomainExceptionValidation.When(urlImage?.Length > 250,
-                "O nome da imagem não pode exceder 250 caracteres");
+                "Image name cannot exceed 250 characters.");
 
             DomainExceptionValidation.When(urlThumbnail?.Length > 250,
-                "O nome da imagem não pode exceder 250 caracteres");
+                "Thumbnail name cannot exceed 250 characters.");
 
-            DomainExceptionValidation.When(int.Parse(createdAt.ToString("yyyyMMdd")) > 0,
-                "O nome da imagem não pode exceder 250 caracteres");
+            DomainExceptionValidation.When(int.Parse(createdAt.ToString("yyyyMMdd")) <= 0,
+                "Image creation date must be valid.");
 
             Name = name;
-            Description = description;
             UrlImage = urlImage;
             UrlThumbnail = urlThumbnail;
             CreatedAt = createdAt;
